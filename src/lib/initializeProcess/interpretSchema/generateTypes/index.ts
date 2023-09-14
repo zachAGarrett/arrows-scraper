@@ -21,9 +21,7 @@ export default async function generateTypes({
     if (!fs.existsSync(codegenTarget.dir)) {
       fs.mkdirSync(codegenTarget.dir, { recursive: true });
     }
-    fs.writeFileSync(codegenTarget.dir + codegenTarget.fileName, "");
 
-    // Generate the file
     await generate({
       ogm,
       outFile: codegenTarget.dir + codegenTarget.fileName,

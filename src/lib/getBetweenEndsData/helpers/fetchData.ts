@@ -1,4 +1,4 @@
-import { BeEndpoint } from "./enums.js";
+import { BeEndpoint } from "../types";
 
 export const fetchData = (
   endpoint: BeEndpoint,
@@ -8,6 +8,8 @@ export const fetchData = (
   const url = `https://resultsapi.herokuapp.com/${endpoint}/${
     evNum === undefined ? "" : evNum
   }${scores ? "/scores" : ""}`;
+
+  console.log(url);
   return fetch(url, {
     headers: {
       accept: "application/json, text/plain, */*",

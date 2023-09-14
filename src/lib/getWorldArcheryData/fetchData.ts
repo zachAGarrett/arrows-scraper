@@ -2,7 +2,7 @@ import { FetchProps } from "./types.js";
 
 export default function worldArchery() {}
 
-export const getData = (props: FetchProps) => {
+export const fetchData = (props: FetchProps) => {
   const contentStr = `?content=${props.content}`,
     compStr = `&CompId=${props.compId}`,
     catStr = props.catCode ? `&CatCode=${props.catCode}` : "",
