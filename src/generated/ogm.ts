@@ -277,6 +277,7 @@ export type MutationUpdateSetsArgs = {
   disconnect?: InputMaybe<SetDisconnectInput>;
   create?: InputMaybe<SetRelationInput>;
   delete?: InputMaybe<SetDeleteInput>;
+  connectOrCreate?: InputMaybe<SetConnectOrCreateInput>;
 };
 
 export type MutationCreateTargetsArgs = {
@@ -308,6 +309,7 @@ export type MutationUpdateMatchesArgs = {
   disconnect?: InputMaybe<MatchDisconnectInput>;
   create?: InputMaybe<MatchRelationInput>;
   delete?: InputMaybe<MatchDeleteInput>;
+  connectOrCreate?: InputMaybe<MatchConnectOrCreateInput>;
 };
 
 export type MutationCreateEventsArgs = {
@@ -408,67 +410,6 @@ export enum DataSourceType {
   Web = "WEB",
 }
 
-export enum Division {
-  /** Recurve Senior */
-  Rs = "RS",
-  /** Recurve U21 (Junior) */
-  R21 = "R21",
-  /** Recurve U18 (Cadet) */
-  R18 = "R18",
-  /** Recurve U15 (Cub) */
-  R15 = "R15",
-  /** Recurve U13 (Bowman) */
-  R13 = "R13",
-  /** Recurve 50+ (Master) */
-  R50 = "R50",
-  /** Recurve 60+ (Master 60) */
-  R60 = "R60",
-  /** Recurve 70+ (Master 70) */
-  R70 = "R70",
-  /** Recurve College */
-  Rc = "RC",
-  /** Recurve Open */
-  Ro = "RO",
-  /** Compound Senior */
-  Cs = "CS",
-  /** Compound U21 (Junior) */
-  C21 = "C21",
-  /** Compound U18 (Cadet) */
-  C18 = "C18",
-  /** Compound U15 (Cub) */
-  C15 = "C15",
-  /** Compound U13 (Bowman) */
-  C13 = "C13",
-  /** Compound 50+ (Master) */
-  C5 = "C5",
-  /** Compound 60+ (Master 60) */
-  C6 = "C6",
-  /** Compound 70+ (Master 70) */
-  C7 = "C7",
-  /** Compound College */
-  Cc = "CC",
-  /** Compound Open */
-  Co = "CO",
-  /** W1 Open */
-  W1 = "W1",
-  /** V.I. Open */
-  Vi = "VI",
-  /** Barebow Senior */
-  Bs = "BS",
-  /** Barebow U21 (Junior) */
-  B21 = "B21",
-  /** Barebow U18 (Cadet) */
-  B18 = "B18",
-  /** Barebow U15 (Cub) */
-  B15 = "B15",
-  /** Barebow 50+ (Master) */
-  B5 = "B5",
-  /** Fixed Pins U21 */
-  F21 = "F21",
-  /** Fixed Pins U18 */
-  F18 = "F18",
-}
-
 export enum MatchGender {
   /** Male event gender */
   M = "M",
@@ -492,256 +433,6 @@ export enum NameOrder {
   L = "L",
 }
 
-export enum NationCode {
-  Afg = "AFG",
-  Ala = "ALA",
-  Alb = "ALB",
-  Dza = "DZA",
-  Asm = "ASM",
-  And = "AND",
-  Ago = "AGO",
-  Aia = "AIA",
-  Ata = "ATA",
-  Atg = "ATG",
-  Arg = "ARG",
-  Arm = "ARM",
-  Abw = "ABW",
-  Aus = "AUS",
-  Aut = "AUT",
-  Aze = "AZE",
-  Bhs = "BHS",
-  Bhr = "BHR",
-  Bgd = "BGD",
-  Brb = "BRB",
-  Blr = "BLR",
-  Bel = "BEL",
-  Blz = "BLZ",
-  Ben = "BEN",
-  Bmu = "BMU",
-  Btn = "BTN",
-  Bol = "BOL",
-  Bih = "BIH",
-  Bwa = "BWA",
-  Bvt = "BVT",
-  Bra = "BRA",
-  Vgb = "VGB",
-  Iot = "IOT",
-  Brn = "BRN",
-  Bgr = "BGR",
-  Bfa = "BFA",
-  Bdi = "BDI",
-  Khm = "KHM",
-  Cmr = "CMR",
-  Can = "CAN",
-  Cpv = "CPV",
-  Cym = "CYM",
-  Caf = "CAF",
-  Tcd = "TCD",
-  Chl = "CHL",
-  Chn = "CHN",
-  Hkg = "HKG",
-  Mac = "MAC",
-  Cxr = "CXR",
-  Cck = "CCK",
-  Col = "COL",
-  Com = "COM",
-  Cog = "COG",
-  Cod = "COD",
-  Cok = "COK",
-  Cri = "CRI",
-  Civ = "CIV",
-  Hrv = "HRV",
-  Cub = "CUB",
-  Cyp = "CYP",
-  Cze = "CZE",
-  Dnk = "DNK",
-  Dji = "DJI",
-  Dma = "DMA",
-  Dom = "DOM",
-  Ecu = "ECU",
-  Egy = "EGY",
-  Slv = "SLV",
-  Gnq = "GNQ",
-  Eri = "ERI",
-  Est = "EST",
-  Eth = "ETH",
-  Flk = "FLK",
-  Fro = "FRO",
-  Fji = "FJI",
-  Fin = "FIN",
-  Fra = "FRA",
-  Guf = "GUF",
-  Pyf = "PYF",
-  Atf = "ATF",
-  Gab = "GAB",
-  Gmb = "GMB",
-  Geo = "GEO",
-  Deu = "DEU",
-  Gha = "GHA",
-  Gib = "GIB",
-  Grc = "GRC",
-  Grl = "GRL",
-  Grd = "GRD",
-  Glp = "GLP",
-  Gum = "GUM",
-  Gtm = "GTM",
-  Ggy = "GGY",
-  Gin = "GIN",
-  Gnb = "GNB",
-  Guy = "GUY",
-  Hti = "HTI",
-  Hmd = "HMD",
-  Vat = "VAT",
-  Hnd = "HND",
-  Hun = "HUN",
-  Isl = "ISL",
-  Ind = "IND",
-  Idn = "IDN",
-  Irn = "IRN",
-  Irq = "IRQ",
-  Irl = "IRL",
-  Imn = "IMN",
-  Isr = "ISR",
-  Ita = "ITA",
-  Jm = "JM",
-  Jpn = "JPN",
-  Jey = "JEY",
-  Jor = "JOR",
-  Kaz = "KAZ",
-  Ken = "KEN",
-  Kir = "KIR",
-  Prk = "PRK",
-  Kor = "KOR",
-  Kwt = "KWT",
-  Kgz = "KGZ",
-  Lao = "LAO",
-  Lva = "LVA",
-  Lbn = "LBN",
-  Lso = "LSO",
-  Lbr = "LBR",
-  Lby = "LBY",
-  Lie = "LIE",
-  Ltu = "LTU",
-  Lux = "LUX",
-  Mkd = "MKD",
-  Mdg = "MDG",
-  Mwi = "MWI",
-  Mys = "MYS",
-  Mdv = "MDV",
-  Mli = "MLI",
-  Mlt = "MLT",
-  Mhl = "MHL",
-  Mtq = "MTQ",
-  Mrt = "MRT",
-  Mus = "MUS",
-  Myt = "MYT",
-  Mex = "MEX",
-  Fsm = "FSM",
-  Mda = "MDA",
-  Mco = "MCO",
-  Mng = "MNG",
-  Mne = "MNE",
-  Msr = "MSR",
-  Mar = "MAR",
-  Moz = "MOZ",
-  Mmr = "MMR",
-  Nam = "NAM",
-  Nru = "NRU",
-  Npl = "NPL",
-  Nld = "NLD",
-  Ant = "ANT",
-  Ncl = "NCL",
-  Nzl = "NZL",
-  Nic = "NIC",
-  Ner = "NER",
-  Nga = "NGA",
-  Niu = "NIU",
-  Nfk = "NFK",
-  Mnp = "MNP",
-  Nor = "NOR",
-  Omn = "OMN",
-  Pak = "PAK",
-  Plw = "PLW",
-  Pse = "PSE",
-  Pan = "PAN",
-  Png = "PNG",
-  Pry = "PRY",
-  Per = "PER",
-  Phl = "PHL",
-  Pcn = "PCN",
-  Pol = "POL",
-  Prt = "PRT",
-  Pri = "PRI",
-  Qat = "QAT",
-  Reu = "REU",
-  Rou = "ROU",
-  Rus = "RUS",
-  Rwa = "RWA",
-  Blm = "BLM",
-  Shn = "SHN",
-  Kna = "KNA",
-  Lca = "LCA",
-  Maf = "MAF",
-  Spm = "SPM",
-  Vct = "VCT",
-  Wsm = "WSM",
-  Smr = "SMR",
-  Stp = "STP",
-  Sau = "SAU",
-  Sen = "SEN",
-  Srb = "SRB",
-  Syc = "SYC",
-  Sle = "SLE",
-  Sgp = "SGP",
-  Svk = "SVK",
-  Svn = "SVN",
-  Slb = "SLB",
-  Som = "SOM",
-  Zaf = "ZAF",
-  Sgs = "SGS",
-  Ssd = "SSD",
-  Esp = "ESP",
-  Lka = "LKA",
-  Sdn = "SDN",
-  Sur = "SUR",
-  Sjm = "SJM",
-  Swz = "SWZ",
-  Swe = "SWE",
-  Che = "CHE",
-  Syr = "SYR",
-  Twn = "TWN",
-  Tjk = "TJK",
-  Tza = "TZA",
-  Tha = "THA",
-  Tls = "TLS",
-  Tgo = "TGO",
-  Tkl = "TKL",
-  Ton = "TON",
-  Tto = "TTO",
-  Tun = "TUN",
-  Tur = "TUR",
-  Tkm = "TKM",
-  Tca = "TCA",
-  Tuv = "TUV",
-  Uga = "UGA",
-  Ukr = "UKR",
-  Are = "ARE",
-  Gbr = "GBR",
-  Usa = "USA",
-  Umi = "UMI",
-  Ury = "URY",
-  Uzb = "UZB",
-  Vut = "VUT",
-  Ven = "VEN",
-  Vnm = "VNM",
-  Vir = "VIR",
-  Wlf = "WLF",
-  Esh = "ESH",
-  Yem = "YEM",
-  Zmb = "ZMB",
-  Zwe = "ZWE",
-}
-
 export enum Result {
   /** Win */
   W = "W",
@@ -763,9 +454,8 @@ export type ArrowOf = {
 };
 
 export type AthleteCompetes = {
+  division: Scalars["String"]["output"];
   eloDelta?: Maybe<Scalars["Int"]["output"]>;
-  division: Division;
-  nation: NationCode;
 };
 
 export type AthleteShoots = {
@@ -774,17 +464,17 @@ export type AthleteShoots = {
 };
 
 export type EventOf = {
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type InDataSource = {
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
 
 export type MatchOf = {
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type SetOf = {
@@ -892,7 +582,6 @@ export type Athlete = {
   id: Scalars["ID"]["output"];
   verified: Scalars["Boolean"]["output"];
   nameOrder: NameOrder;
-  activeNation: NationCode;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
   sets: Array<Set>;
@@ -1006,7 +695,7 @@ export type AthleteDataSourceDataSourcesAggregationSelection = {
 
 export type AthleteDataSourceDataSourcesEdgeAggregateSelection = {
   __typename?: "AthleteDataSourceDataSourcesEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1030,7 +719,7 @@ export type AthleteDataSourcesRelationship = InDataSource & {
   __typename?: "AthleteDataSourcesRelationship";
   cursor: Scalars["String"]["output"];
   node: DataSource;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1050,6 +739,7 @@ export type AthleteEventMatchesAggregationSelection = {
 
 export type AthleteEventMatchesEdgeAggregateSelection = {
   __typename?: "AthleteEventMatchesEdgeAggregateSelection";
+  division: StringAggregateSelectionNonNullable;
   eloDelta: IntAggregateSelectionNullable;
 };
 
@@ -1072,9 +762,8 @@ export type AthleteMatchesRelationship = AthleteCompetes & {
   __typename?: "AthleteMatchesRelationship";
   cursor: Scalars["String"]["output"];
   node: Event;
+  division: Scalars["String"]["output"];
   eloDelta?: Maybe<Scalars["Int"]["output"]>;
-  division: Division;
-  nation: NationCode;
 };
 
 export type AthleteNationNationsAggregationSelection = {
@@ -1242,7 +931,7 @@ export type CompetitionDataSourceDataSourcesAggregationSelection = {
 
 export type CompetitionDataSourceDataSourcesEdgeAggregateSelection = {
   __typename?: "CompetitionDataSourceDataSourcesEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1266,7 +955,7 @@ export type CompetitionDataSourcesRelationship = InDataSource & {
   __typename?: "CompetitionDataSourcesRelationship";
   cursor: Scalars["String"]["output"];
   node: DataSource;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1286,7 +975,7 @@ export type CompetitionEventEventsAggregationSelection = {
 
 export type CompetitionEventEventsEdgeAggregateSelection = {
   __typename?: "CompetitionEventEventsEdgeAggregateSelection";
-  number: IntAggregateSelectionNonNullable;
+  number: IntAggregateSelectionNullable;
 };
 
 export type CompetitionEventEventsNodeAggregateSelection = {
@@ -1308,7 +997,7 @@ export type CompetitionEventsRelationship = EventOf & {
   __typename?: "CompetitionEventsRelationship";
   cursor: Scalars["String"]["output"];
   node: Event;
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type CompetitionNationConnection = {
@@ -1502,7 +1191,7 @@ export type DataSourceAthleteAthletesAggregationSelection = {
 
 export type DataSourceAthleteAthletesEdgeAggregateSelection = {
   __typename?: "DataSourceAthleteAthletesEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1529,7 +1218,7 @@ export type DataSourceAthletesRelationship = InDataSource & {
   __typename?: "DataSourceAthletesRelationship";
   cursor: Scalars["String"]["output"];
   node: Athlete;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1543,7 +1232,7 @@ export type DataSourceCompetitionCompetitionsAggregationSelection = {
 
 export type DataSourceCompetitionCompetitionsEdgeAggregateSelection = {
   __typename?: "DataSourceCompetitionCompetitionsEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1567,7 +1256,7 @@ export type DataSourceCompetitionsRelationship = InDataSource & {
   __typename?: "DataSourceCompetitionsRelationship";
   cursor: Scalars["String"]["output"];
   node: Competition;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1587,7 +1276,7 @@ export type DataSourceEventEventsAggregationSelection = {
 
 export type DataSourceEventEventsEdgeAggregateSelection = {
   __typename?: "DataSourceEventEventsEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1611,7 +1300,7 @@ export type DataSourceEventsRelationship = InDataSource & {
   __typename?: "DataSourceEventsRelationship";
   cursor: Scalars["String"]["output"];
   node: Event;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1646,7 +1335,7 @@ export type DeleteInfo = {
 export type Event = {
   __typename?: "Event";
   name: Scalars["String"]["output"];
-  complete: Scalars["Boolean"]["output"];
+  complete?: Maybe<Scalars["Boolean"]["output"]>;
   id: Scalars["ID"]["output"];
   verified: Scalars["Boolean"]["output"];
   start: Scalars["Date"]["output"];
@@ -1739,7 +1428,7 @@ export type EventCompetitionCompetitionAggregationSelection = {
 
 export type EventCompetitionCompetitionEdgeAggregateSelection = {
   __typename?: "EventCompetitionCompetitionEdgeAggregateSelection";
-  number: IntAggregateSelectionNonNullable;
+  number: IntAggregateSelectionNullable;
 };
 
 export type EventCompetitionCompetitionNodeAggregateSelection = {
@@ -1761,7 +1450,7 @@ export type EventCompetitionRelationship = EventOf & {
   __typename?: "EventCompetitionRelationship";
   cursor: Scalars["String"]["output"];
   node: Competition;
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type EventDataSourceDataSourcesAggregationSelection = {
@@ -1773,7 +1462,7 @@ export type EventDataSourceDataSourcesAggregationSelection = {
 
 export type EventDataSourceDataSourcesEdgeAggregateSelection = {
   __typename?: "EventDataSourceDataSourcesEdgeAggregateSelection";
-  id: StringAggregateSelectionNonNullable;
+  id: StringAggregateSelectionNullable;
   createdAt: DateTimeAggregateSelectionNonNullable;
   updatedAt: DateTimeAggregateSelectionNullable;
 };
@@ -1797,7 +1486,7 @@ export type EventDataSourcesRelationship = InDataSource & {
   __typename?: "EventDataSourcesRelationship";
   cursor: Scalars["String"]["output"];
   node: DataSource;
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   createdAt: Scalars["DateTime"]["output"];
   updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
@@ -1819,7 +1508,7 @@ export type EventMatchesRelationship = MatchOf & {
   __typename?: "EventMatchesRelationship";
   cursor: Scalars["String"]["output"];
   node: Match;
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type EventMatchMatchesAggregationSelection = {
@@ -1831,7 +1520,7 @@ export type EventMatchMatchesAggregationSelection = {
 
 export type EventMatchMatchesEdgeAggregateSelection = {
   __typename?: "EventMatchMatchesEdgeAggregateSelection";
-  number: IntAggregateSelectionNonNullable;
+  number: IntAggregateSelectionNullable;
 };
 
 export type EventMatchMatchesNodeAggregateSelection = {
@@ -1893,9 +1582,12 @@ export type Match = {
   eventAggregate?: Maybe<MatchEventEventAggregationSelection>;
   athletes: Array<Athlete>;
   athletesAggregate?: Maybe<MatchAthleteAthletesAggregationSelection>;
+  dataSources: Array<DataSource>;
+  dataSourcesAggregate?: Maybe<MatchDataSourceDataSourcesAggregationSelection>;
   setsConnection: MatchSetsConnection;
   eventConnection: MatchEventConnection;
   athletesConnection: MatchAthletesConnection;
+  dataSourcesConnection: MatchDataSourcesConnection;
 };
 
 export type MatchSetsArgs = {
@@ -1931,6 +1623,17 @@ export type MatchAthletesAggregateArgs = {
   directed?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+export type MatchDataSourcesArgs = {
+  where?: InputMaybe<DataSourceWhere>;
+  options?: InputMaybe<DataSourceOptions>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type MatchDataSourcesAggregateArgs = {
+  where?: InputMaybe<DataSourceWhere>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
 export type MatchSetsConnectionArgs = {
   where?: InputMaybe<MatchSetsConnectionWhere>;
   first?: InputMaybe<Scalars["Int"]["input"]>;
@@ -1955,6 +1658,14 @@ export type MatchAthletesConnectionArgs = {
   sort?: InputMaybe<Array<MatchAthletesConnectionSort>>;
 };
 
+export type MatchDataSourcesConnectionArgs = {
+  where?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  after?: InputMaybe<Scalars["String"]["input"]>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+  sort?: InputMaybe<Array<MatchDataSourcesConnectionSort>>;
+};
+
 export type MatchAggregateSelection = {
   __typename?: "MatchAggregateSelection";
   count: Scalars["Int"]["output"];
@@ -1972,6 +1683,7 @@ export type MatchAthleteAthletesAggregationSelection = {
 
 export type MatchAthleteAthletesEdgeAggregateSelection = {
   __typename?: "MatchAthleteAthletesEdgeAggregateSelection";
+  division: StringAggregateSelectionNonNullable;
   eloDelta: IntAggregateSelectionNullable;
 };
 
@@ -1997,9 +1709,46 @@ export type MatchAthletesRelationship = AthleteCompetes & {
   __typename?: "MatchAthletesRelationship";
   cursor: Scalars["String"]["output"];
   node: Athlete;
+  division: Scalars["String"]["output"];
   eloDelta?: Maybe<Scalars["Int"]["output"]>;
-  division: Division;
-  nation: NationCode;
+};
+
+export type MatchDataSourceDataSourcesAggregationSelection = {
+  __typename?: "MatchDataSourceDataSourcesAggregationSelection";
+  count: Scalars["Int"]["output"];
+  node?: Maybe<MatchDataSourceDataSourcesNodeAggregateSelection>;
+  edge?: Maybe<MatchDataSourceDataSourcesEdgeAggregateSelection>;
+};
+
+export type MatchDataSourceDataSourcesEdgeAggregateSelection = {
+  __typename?: "MatchDataSourceDataSourcesEdgeAggregateSelection";
+  id: StringAggregateSelectionNullable;
+  createdAt: DateTimeAggregateSelectionNonNullable;
+  updatedAt: DateTimeAggregateSelectionNullable;
+};
+
+export type MatchDataSourceDataSourcesNodeAggregateSelection = {
+  __typename?: "MatchDataSourceDataSourcesNodeAggregateSelection";
+  name: StringAggregateSelectionNonNullable;
+  id: IdAggregateSelectionNonNullable;
+  createdAt: DateTimeAggregateSelectionNonNullable;
+  updatedAt: DateTimeAggregateSelectionNullable;
+};
+
+export type MatchDataSourcesConnection = {
+  __typename?: "MatchDataSourcesConnection";
+  edges: Array<MatchDataSourcesRelationship>;
+  totalCount: Scalars["Int"]["output"];
+  pageInfo: PageInfo;
+};
+
+export type MatchDataSourcesRelationship = InDataSource & {
+  __typename?: "MatchDataSourcesRelationship";
+  cursor: Scalars["String"]["output"];
+  node: DataSource;
+  id?: Maybe<Scalars["String"]["output"]>;
+  createdAt: Scalars["DateTime"]["output"];
+  updatedAt?: Maybe<Scalars["DateTime"]["output"]>;
 };
 
 export type MatchEdge = {
@@ -2031,7 +1780,7 @@ export type MatchEventEventAggregationSelection = {
 
 export type MatchEventEventEdgeAggregateSelection = {
   __typename?: "MatchEventEventEdgeAggregateSelection";
-  number: IntAggregateSelectionNonNullable;
+  number: IntAggregateSelectionNullable;
 };
 
 export type MatchEventEventNodeAggregateSelection = {
@@ -2046,7 +1795,7 @@ export type MatchEventRelationship = MatchOf & {
   __typename?: "MatchEventRelationship";
   cursor: Scalars["String"]["output"];
   node: Event;
-  number: Scalars["Int"]["output"];
+  number?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type MatchSetsConnection = {
@@ -2243,11 +1992,14 @@ export type Set = {
   matchAggregate?: Maybe<SetMatchMatchAggregationSelection>;
   athlete: Athlete;
   athleteAggregate?: Maybe<SetAthleteAthleteAggregationSelection>;
+  nation?: Maybe<Nation>;
+  nationAggregate?: Maybe<SetNationNationAggregationSelection>;
   targetConnection: SetTargetConnection;
   arrowsConnection: SetArrowsConnection;
   setsConnection: SetSetsConnection;
   matchConnection: SetMatchConnection;
   athleteConnection: SetAthleteConnection;
+  nationConnection: SetNationConnection;
 };
 
 export type SetTargetArgs = {
@@ -2305,6 +2057,17 @@ export type SetAthleteAggregateArgs = {
   directed?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+export type SetNationArgs = {
+  where?: InputMaybe<NationWhere>;
+  options?: InputMaybe<NationOptions>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type SetNationAggregateArgs = {
+  where?: InputMaybe<NationWhere>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
 export type SetTargetConnectionArgs = {
   where?: InputMaybe<SetTargetConnectionWhere>;
   first?: InputMaybe<Scalars["Int"]["input"]>;
@@ -2343,6 +2106,14 @@ export type SetAthleteConnectionArgs = {
   after?: InputMaybe<Scalars["String"]["input"]>;
   directed?: InputMaybe<Scalars["Boolean"]["input"]>;
   sort?: InputMaybe<Array<SetAthleteConnectionSort>>;
+};
+
+export type SetNationConnectionArgs = {
+  where?: InputMaybe<SetNationConnectionWhere>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  after?: InputMaybe<Scalars["String"]["input"]>;
+  directed?: InputMaybe<Scalars["Boolean"]["input"]>;
+  sort?: InputMaybe<Array<SetNationConnectionSort>>;
 };
 
 export type SetAggregateSelection = {
@@ -2465,6 +2236,34 @@ export type SetMatchRelationship = SetOf & {
   cursor: Scalars["String"]["output"];
   node: Match;
   number: Scalars["Int"]["output"];
+};
+
+export type SetNationConnection = {
+  __typename?: "SetNationConnection";
+  edges: Array<SetNationRelationship>;
+  totalCount: Scalars["Int"]["output"];
+  pageInfo: PageInfo;
+};
+
+export type SetNationNationAggregationSelection = {
+  __typename?: "SetNationNationAggregationSelection";
+  count: Scalars["Int"]["output"];
+  node?: Maybe<SetNationNationNodeAggregateSelection>;
+};
+
+export type SetNationNationNodeAggregateSelection = {
+  __typename?: "SetNationNationNodeAggregateSelection";
+  name: StringAggregateSelectionNullable;
+  code: StringAggregateSelectionNonNullable;
+  id: IdAggregateSelectionNonNullable;
+  createdAt: DateTimeAggregateSelectionNonNullable;
+  updatedAt: DateTimeAggregateSelectionNullable;
+};
+
+export type SetNationRelationship = {
+  __typename?: "SetNationRelationship";
+  cursor: Scalars["String"]["output"];
+  node: Nation;
 };
 
 export type SetsConnection = {
@@ -2989,21 +2788,18 @@ export type ArrowWhere = {
 };
 
 export type AthleteCompetesCreateInput = {
+  division: Scalars["String"]["input"];
   eloDelta?: InputMaybe<Scalars["Int"]["input"]>;
-  division: Division;
-  nation: NationCode;
 };
 
 export type AthleteCompetesSort = {
-  eloDelta?: InputMaybe<SortDirection>;
   division?: InputMaybe<SortDirection>;
-  nation?: InputMaybe<SortDirection>;
+  eloDelta?: InputMaybe<SortDirection>;
 };
 
 export type AthleteCompetesUpdateInput = {
+  division?: InputMaybe<Scalars["String"]["input"]>;
   eloDelta?: InputMaybe<Scalars["Int"]["input"]>;
-  division?: InputMaybe<Division>;
-  nation?: InputMaybe<NationCode>;
   eloDelta_INCREMENT?: InputMaybe<Scalars["Int"]["input"]>;
   eloDelta_DECREMENT?: InputMaybe<Scalars["Int"]["input"]>;
 };
@@ -3012,6 +2808,21 @@ export type AthleteCompetesWhere = {
   OR?: InputMaybe<Array<AthleteCompetesWhere>>;
   AND?: InputMaybe<Array<AthleteCompetesWhere>>;
   NOT?: InputMaybe<AthleteCompetesWhere>;
+  division?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  division_NOT?: InputMaybe<Scalars["String"]["input"]>;
+  division_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  division_NOT_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  division_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
+  division_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  division_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  division_NOT_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  division_NOT_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  division_NOT_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
   eloDelta?: InputMaybe<Scalars["Int"]["input"]>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
   eloDelta_NOT?: InputMaybe<Scalars["Int"]["input"]>;
@@ -3022,18 +2833,6 @@ export type AthleteCompetesWhere = {
   eloDelta_LTE?: InputMaybe<Scalars["Int"]["input"]>;
   eloDelta_GT?: InputMaybe<Scalars["Int"]["input"]>;
   eloDelta_GTE?: InputMaybe<Scalars["Int"]["input"]>;
-  division?: InputMaybe<Division>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  division_NOT?: InputMaybe<Division>;
-  division_IN?: InputMaybe<Array<Division>>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  division_NOT_IN?: InputMaybe<Array<Division>>;
-  nation?: InputMaybe<NationCode>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  nation_NOT?: InputMaybe<NationCode>;
-  nation_IN?: InputMaybe<Array<NationCode>>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  nation_NOT_IN?: InputMaybe<Array<NationCode>>;
 };
 
 export type AthleteConnectInput = {
@@ -3059,7 +2858,6 @@ export type AthleteCreateInput = {
   qualElo?: InputMaybe<Scalars["Int"]["input"]>;
   verified?: Scalars["Boolean"]["input"];
   nameOrder: NameOrder;
-  activeNation: NationCode;
   sets?: InputMaybe<AthleteSetsFieldInput>;
   matches?: InputMaybe<AthleteMatchesFieldInput>;
   dataSources?: InputMaybe<AthleteDataSourcesFieldInput>;
@@ -3082,7 +2880,7 @@ export type AthleteDataSourcesAggregateInput = {
 export type AthleteDataSourcesConnectFieldInput = {
   where?: InputMaybe<DataSourceConnectWhere>;
   connect?: InputMaybe<Array<DataSourceConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -3111,12 +2909,12 @@ export type AthleteDataSourcesConnectOrCreateFieldInput = {
 
 export type AthleteDataSourcesConnectOrCreateFieldInputOnCreate = {
   node: DataSourceOnCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type AthleteDataSourcesCreateFieldInput = {
   node: DataSourceCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type AthleteDataSourcesDeleteFieldInput = {
@@ -3429,6 +3227,61 @@ export type AthleteMatchesEdgeAggregationWhereInput = {
   AND?: InputMaybe<Array<AthleteMatchesEdgeAggregationWhereInput>>;
   OR?: InputMaybe<Array<AthleteMatchesEdgeAggregationWhereInput>>;
   NOT?: InputMaybe<AthleteMatchesEdgeAggregationWhereInput>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
   /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
   eloDelta_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
   eloDelta_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
@@ -4034,7 +3887,6 @@ export type AthleteSort = {
   id?: InputMaybe<SortDirection>;
   verified?: InputMaybe<SortDirection>;
   nameOrder?: InputMaybe<SortDirection>;
-  activeNation?: InputMaybe<SortDirection>;
   createdAt?: InputMaybe<SortDirection>;
   updatedAt?: InputMaybe<SortDirection>;
 };
@@ -4046,7 +3898,6 @@ export type AthleteUpdateInput = {
   qualElo?: InputMaybe<Scalars["Int"]["input"]>;
   verified?: InputMaybe<Scalars["Boolean"]["input"]>;
   nameOrder?: InputMaybe<NameOrder>;
-  activeNation?: InputMaybe<NationCode>;
   elimElo_INCREMENT?: InputMaybe<Scalars["Int"]["input"]>;
   elimElo_DECREMENT?: InputMaybe<Scalars["Int"]["input"]>;
   qualElo_INCREMENT?: InputMaybe<Scalars["Int"]["input"]>;
@@ -4157,12 +4008,6 @@ export type AthleteWhere = {
   nameOrder_IN?: InputMaybe<Array<NameOrder>>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
   nameOrder_NOT_IN?: InputMaybe<Array<NameOrder>>;
-  activeNation?: InputMaybe<NationCode>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  activeNation_NOT?: InputMaybe<NationCode>;
-  activeNation_IN?: InputMaybe<Array<NationCode>>;
-  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  activeNation_NOT_IN?: InputMaybe<Array<NationCode>>;
   /** @deprecated Use `sets_SOME` instead. */
   sets?: InputMaybe<SetWhere>;
   /** @deprecated Use `sets_NONE` instead. */
@@ -4283,7 +4128,7 @@ export type CompetitionConnectWhere = {
 };
 
 export type CompetitionCreateInput = {
-  complete: Scalars["Boolean"]["input"];
+  complete?: Scalars["Boolean"]["input"];
   name: Scalars["String"]["input"];
   verified?: Scalars["Boolean"]["input"];
   start: Scalars["Date"]["input"];
@@ -4309,7 +4154,7 @@ export type CompetitionDataSourcesAggregateInput = {
 export type CompetitionDataSourcesConnectFieldInput = {
   where?: InputMaybe<DataSourceConnectWhere>;
   connect?: InputMaybe<Array<DataSourceConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -4338,12 +4183,12 @@ export type CompetitionDataSourcesConnectOrCreateFieldInput = {
 
 export type CompetitionDataSourcesConnectOrCreateFieldInputOnCreate = {
   node: DataSourceOnCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type CompetitionDataSourcesCreateFieldInput = {
   node: DataSourceCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type CompetitionDataSourcesDeleteFieldInput = {
@@ -4613,7 +4458,7 @@ export type CompetitionEventsAggregateInput = {
 export type CompetitionEventsConnectFieldInput = {
   where?: InputMaybe<EventConnectWhere>;
   connect?: InputMaybe<Array<EventConnectInput>>;
-  edge: EventOfCreateInput;
+  edge?: InputMaybe<EventOfCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -4637,7 +4482,7 @@ export type CompetitionEventsConnectionWhere = {
 
 export type CompetitionEventsCreateFieldInput = {
   node: EventCreateInput;
-  edge: EventOfCreateInput;
+  edge?: InputMaybe<EventOfCreateInput>;
 };
 
 export type CompetitionEventsDeleteFieldInput = {
@@ -5232,7 +5077,7 @@ export type DataSourceAthletesAggregateInput = {
 export type DataSourceAthletesConnectFieldInput = {
   where?: InputMaybe<AthleteConnectWhere>;
   connect?: InputMaybe<Array<AthleteConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -5256,7 +5101,7 @@ export type DataSourceAthletesConnectionWhere = {
 
 export type DataSourceAthletesCreateFieldInput = {
   node: AthleteCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type DataSourceAthletesDeleteFieldInput = {
@@ -5623,7 +5468,7 @@ export type DataSourceCompetitionsAggregateInput = {
 export type DataSourceCompetitionsConnectFieldInput = {
   where?: InputMaybe<CompetitionConnectWhere>;
   connect?: InputMaybe<Array<CompetitionConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -5647,7 +5492,7 @@ export type DataSourceCompetitionsConnectionWhere = {
 
 export type DataSourceCompetitionsCreateFieldInput = {
   node: CompetitionCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type DataSourceCompetitionsDeleteFieldInput = {
@@ -5934,7 +5779,7 @@ export type DataSourceEventsAggregateInput = {
 export type DataSourceEventsConnectFieldInput = {
   where?: InputMaybe<EventConnectWhere>;
   connect?: InputMaybe<Array<EventConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -5958,7 +5803,7 @@ export type DataSourceEventsConnectionWhere = {
 
 export type DataSourceEventsCreateFieldInput = {
   node: EventCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type DataSourceEventsDeleteFieldInput = {
@@ -6394,7 +6239,7 @@ export type EventCompetitionAggregateInput = {
 export type EventCompetitionConnectFieldInput = {
   where?: InputMaybe<CompetitionConnectWhere>;
   connect?: InputMaybe<CompetitionConnectInput>;
-  edge: EventOfCreateInput;
+  edge?: InputMaybe<EventOfCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -6418,7 +6263,7 @@ export type EventCompetitionConnectionWhere = {
 
 export type EventCompetitionCreateFieldInput = {
   node: CompetitionCreateInput;
-  edge: EventOfCreateInput;
+  edge?: InputMaybe<EventOfCreateInput>;
 };
 
 export type EventCompetitionDeleteFieldInput = {
@@ -6605,7 +6450,7 @@ export type EventConnectWhere = {
 
 export type EventCreateInput = {
   name: Scalars["String"]["input"];
-  complete: Scalars["Boolean"]["input"];
+  complete?: InputMaybe<Scalars["Boolean"]["input"]>;
   verified?: Scalars["Boolean"]["input"];
   start: Scalars["Date"]["input"];
   end: Scalars["Date"]["input"];
@@ -6630,7 +6475,7 @@ export type EventDataSourcesAggregateInput = {
 export type EventDataSourcesConnectFieldInput = {
   where?: InputMaybe<DataSourceConnectWhere>;
   connect?: InputMaybe<Array<DataSourceConnectInput>>;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -6659,12 +6504,12 @@ export type EventDataSourcesConnectOrCreateFieldInput = {
 
 export type EventDataSourcesConnectOrCreateFieldInputOnCreate = {
   node: DataSourceOnCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type EventDataSourcesCreateFieldInput = {
   node: DataSourceCreateInput;
-  edge: InDataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
 };
 
 export type EventDataSourcesDeleteFieldInput = {
@@ -6934,7 +6779,7 @@ export type EventMatchesAggregateInput = {
 export type EventMatchesConnectFieldInput = {
   where?: InputMaybe<MatchConnectWhere>;
   connect?: InputMaybe<Array<MatchConnectInput>>;
-  edge: MatchOfCreateInput;
+  edge?: InputMaybe<MatchOfCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -6958,7 +6803,7 @@ export type EventMatchesConnectionWhere = {
 
 export type EventMatchesCreateFieldInput = {
   node: MatchCreateInput;
-  edge: MatchOfCreateInput;
+  edge?: InputMaybe<MatchOfCreateInput>;
 };
 
 export type EventMatchesDeleteFieldInput = {
@@ -7075,7 +6920,7 @@ export type EventMatchesUpdateFieldInput = {
 };
 
 export type EventOfCreateInput = {
-  number: Scalars["Int"]["input"];
+  number?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type EventOfSort = {
@@ -7095,9 +6940,9 @@ export type EventOfWhere = {
   number?: InputMaybe<Scalars["Int"]["input"]>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
   number_NOT?: InputMaybe<Scalars["Int"]["input"]>;
-  number_IN?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+  number_IN?: InputMaybe<Array<InputMaybe<Scalars["Int"]["input"]>>>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  number_NOT_IN?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+  number_NOT_IN?: InputMaybe<Array<InputMaybe<Scalars["Int"]["input"]>>>;
   number_LT?: InputMaybe<Scalars["Int"]["input"]>;
   number_LTE?: InputMaybe<Scalars["Int"]["input"]>;
   number_GT?: InputMaybe<Scalars["Int"]["input"]>;
@@ -7280,7 +7125,7 @@ export type EventWhere = {
 };
 
 export type InDataSourceCreateInput = {
-  id: Scalars["String"]["input"];
+  id?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type InDataSourceSort = {
@@ -7300,9 +7145,9 @@ export type InDataSourceWhere = {
   id?: InputMaybe<Scalars["String"]["input"]>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
   id_NOT?: InputMaybe<Scalars["String"]["input"]>;
-  id_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  id_IN?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  id_NOT_IN?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  id_NOT_IN?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   id_CONTAINS?: InputMaybe<Scalars["String"]["input"]>;
   id_STARTS_WITH?: InputMaybe<Scalars["String"]["input"]>;
   id_ENDS_WITH?: InputMaybe<Scalars["String"]["input"]>;
@@ -7393,6 +7238,61 @@ export type MatchAthletesEdgeAggregationWhereInput = {
   AND?: InputMaybe<Array<MatchAthletesEdgeAggregationWhereInput>>;
   OR?: InputMaybe<Array<MatchAthletesEdgeAggregationWhereInput>>;
   NOT?: InputMaybe<MatchAthletesEdgeAggregationWhereInput>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  division_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  division_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  division_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  division_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
   /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
   eloDelta_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
   eloDelta_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
@@ -7666,6 +7566,11 @@ export type MatchConnectInput = {
   sets?: InputMaybe<Array<MatchSetsConnectFieldInput>>;
   event?: InputMaybe<MatchEventConnectFieldInput>;
   athletes?: InputMaybe<Array<MatchAthletesConnectFieldInput>>;
+  dataSources?: InputMaybe<Array<MatchDataSourcesConnectFieldInput>>;
+};
+
+export type MatchConnectOrCreateInput = {
+  dataSources?: InputMaybe<Array<MatchDataSourcesConnectOrCreateFieldInput>>;
 };
 
 export type MatchConnectWhere = {
@@ -7673,25 +7578,320 @@ export type MatchConnectWhere = {
 };
 
 export type MatchCreateInput = {
-  complete: Scalars["Boolean"]["input"];
+  complete?: Scalars["Boolean"]["input"];
   verified?: Scalars["Boolean"]["input"];
   style: MatchStyle;
   gender: MatchGender;
   sets?: InputMaybe<MatchSetsFieldInput>;
   event?: InputMaybe<MatchEventFieldInput>;
   athletes?: InputMaybe<MatchAthletesFieldInput>;
+  dataSources?: InputMaybe<MatchDataSourcesFieldInput>;
+};
+
+export type MatchDataSourcesAggregateInput = {
+  count?: InputMaybe<Scalars["Int"]["input"]>;
+  count_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  count_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  count_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  count_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  AND?: InputMaybe<Array<MatchDataSourcesAggregateInput>>;
+  OR?: InputMaybe<Array<MatchDataSourcesAggregateInput>>;
+  NOT?: InputMaybe<MatchDataSourcesAggregateInput>;
+  node?: InputMaybe<MatchDataSourcesNodeAggregationWhereInput>;
+  edge?: InputMaybe<MatchDataSourcesEdgeAggregationWhereInput>;
+};
+
+export type MatchDataSourcesConnectFieldInput = {
+  where?: InputMaybe<DataSourceConnectWhere>;
+  connect?: InputMaybe<Array<DataSourceConnectInput>>;
+  edge?: InputMaybe<InDataSourceCreateInput>;
+  /** Whether or not to overwrite any matching relationship with the new properties. */
+  overwrite?: Scalars["Boolean"]["input"];
+};
+
+export type MatchDataSourcesConnectionSort = {
+  edge?: InputMaybe<InDataSourceSort>;
+  node?: InputMaybe<DataSourceSort>;
+};
+
+export type MatchDataSourcesConnectionWhere = {
+  AND?: InputMaybe<Array<MatchDataSourcesConnectionWhere>>;
+  OR?: InputMaybe<Array<MatchDataSourcesConnectionWhere>>;
+  NOT?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  edge?: InputMaybe<InDataSourceWhere>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  edge_NOT?: InputMaybe<InDataSourceWhere>;
+  node?: InputMaybe<DataSourceWhere>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  node_NOT?: InputMaybe<DataSourceWhere>;
+};
+
+export type MatchDataSourcesConnectOrCreateFieldInput = {
+  where: DataSourceConnectOrCreateWhere;
+  onCreate: MatchDataSourcesConnectOrCreateFieldInputOnCreate;
+};
+
+export type MatchDataSourcesConnectOrCreateFieldInputOnCreate = {
+  node: DataSourceOnCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
+};
+
+export type MatchDataSourcesCreateFieldInput = {
+  node: DataSourceCreateInput;
+  edge?: InputMaybe<InDataSourceCreateInput>;
+};
+
+export type MatchDataSourcesDeleteFieldInput = {
+  where?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  delete?: InputMaybe<DataSourceDeleteInput>;
+};
+
+export type MatchDataSourcesDisconnectFieldInput = {
+  where?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  disconnect?: InputMaybe<DataSourceDisconnectInput>;
+};
+
+export type MatchDataSourcesEdgeAggregationWhereInput = {
+  AND?: InputMaybe<Array<MatchDataSourcesEdgeAggregationWhereInput>>;
+  OR?: InputMaybe<Array<MatchDataSourcesEdgeAggregationWhereInput>>;
+  NOT?: InputMaybe<MatchDataSourcesEdgeAggregationWhereInput>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  id_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  id_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  id_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  id_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  id_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  id_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  id_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  id_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  id_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  id_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  id_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  id_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  id_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  id_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  id_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  id_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+};
+
+export type MatchDataSourcesFieldInput = {
+  connectOrCreate?: InputMaybe<
+    Array<MatchDataSourcesConnectOrCreateFieldInput>
+  >;
+  create?: InputMaybe<Array<MatchDataSourcesCreateFieldInput>>;
+  connect?: InputMaybe<Array<MatchDataSourcesConnectFieldInput>>;
+};
+
+export type MatchDataSourcesNodeAggregationWhereInput = {
+  AND?: InputMaybe<Array<MatchDataSourcesNodeAggregationWhereInput>>;
+  OR?: InputMaybe<Array<MatchDataSourcesNodeAggregationWhereInput>>;
+  NOT?: InputMaybe<MatchDataSourcesNodeAggregationWhereInput>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_EQUAL?: InputMaybe<Scalars["ID"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+};
+
+export type MatchDataSourcesUpdateConnectionInput = {
+  node?: InputMaybe<DataSourceUpdateInput>;
+  edge?: InputMaybe<InDataSourceUpdateInput>;
+};
+
+export type MatchDataSourcesUpdateFieldInput = {
+  where?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  connectOrCreate?: InputMaybe<
+    Array<MatchDataSourcesConnectOrCreateFieldInput>
+  >;
+  create?: InputMaybe<Array<MatchDataSourcesCreateFieldInput>>;
+  connect?: InputMaybe<Array<MatchDataSourcesConnectFieldInput>>;
+  update?: InputMaybe<MatchDataSourcesUpdateConnectionInput>;
+  delete?: InputMaybe<Array<MatchDataSourcesDeleteFieldInput>>;
+  disconnect?: InputMaybe<Array<MatchDataSourcesDisconnectFieldInput>>;
 };
 
 export type MatchDeleteInput = {
   sets?: InputMaybe<Array<MatchSetsDeleteFieldInput>>;
   event?: InputMaybe<MatchEventDeleteFieldInput>;
   athletes?: InputMaybe<Array<MatchAthletesDeleteFieldInput>>;
+  dataSources?: InputMaybe<Array<MatchDataSourcesDeleteFieldInput>>;
 };
 
 export type MatchDisconnectInput = {
   sets?: InputMaybe<Array<MatchSetsDisconnectFieldInput>>;
   event?: InputMaybe<MatchEventDisconnectFieldInput>;
   athletes?: InputMaybe<Array<MatchAthletesDisconnectFieldInput>>;
+  dataSources?: InputMaybe<Array<MatchDataSourcesDisconnectFieldInput>>;
 };
 
 export type MatchEventAggregateInput = {
@@ -7710,7 +7910,7 @@ export type MatchEventAggregateInput = {
 export type MatchEventConnectFieldInput = {
   where?: InputMaybe<EventConnectWhere>;
   connect?: InputMaybe<EventConnectInput>;
-  edge: MatchOfCreateInput;
+  edge?: InputMaybe<MatchOfCreateInput>;
   /** Whether or not to overwrite any matching relationship with the new properties. */
   overwrite?: Scalars["Boolean"]["input"];
 };
@@ -7734,7 +7934,7 @@ export type MatchEventConnectionWhere = {
 
 export type MatchEventCreateFieldInput = {
   node: EventCreateInput;
-  edge: MatchOfCreateInput;
+  edge?: InputMaybe<MatchOfCreateInput>;
 };
 
 export type MatchEventDeleteFieldInput = {
@@ -7906,7 +8106,7 @@ export type MatchEventUpdateFieldInput = {
 };
 
 export type MatchOfCreateInput = {
-  number: Scalars["Int"]["input"];
+  number?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type MatchOfSort = {
@@ -7926,9 +8126,9 @@ export type MatchOfWhere = {
   number?: InputMaybe<Scalars["Int"]["input"]>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
   number_NOT?: InputMaybe<Scalars["Int"]["input"]>;
-  number_IN?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+  number_IN?: InputMaybe<Array<InputMaybe<Scalars["Int"]["input"]>>>;
   /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
-  number_NOT_IN?: InputMaybe<Array<Scalars["Int"]["input"]>>;
+  number_NOT_IN?: InputMaybe<Array<InputMaybe<Scalars["Int"]["input"]>>>;
   number_LT?: InputMaybe<Scalars["Int"]["input"]>;
   number_LTE?: InputMaybe<Scalars["Int"]["input"]>;
   number_GT?: InputMaybe<Scalars["Int"]["input"]>;
@@ -7946,6 +8146,7 @@ export type MatchRelationInput = {
   sets?: InputMaybe<Array<MatchSetsCreateFieldInput>>;
   event?: InputMaybe<MatchEventCreateFieldInput>;
   athletes?: InputMaybe<Array<MatchAthletesCreateFieldInput>>;
+  dataSources?: InputMaybe<Array<MatchDataSourcesCreateFieldInput>>;
 };
 
 export type MatchSetsAggregateInput = {
@@ -8123,6 +8324,7 @@ export type MatchUpdateInput = {
   sets?: InputMaybe<Array<MatchSetsUpdateFieldInput>>;
   event?: InputMaybe<MatchEventUpdateFieldInput>;
   athletes?: InputMaybe<Array<MatchAthletesUpdateFieldInput>>;
+  dataSources?: InputMaybe<Array<MatchDataSourcesUpdateFieldInput>>;
 };
 
 export type MatchWhere = {
@@ -8213,6 +8415,19 @@ export type MatchWhere = {
   athletes_SINGLE?: InputMaybe<AthleteWhere>;
   /** Return Matches where some of the related Athletes match this filter */
   athletes_SOME?: InputMaybe<AthleteWhere>;
+  /** @deprecated Use `dataSources_SOME` instead. */
+  dataSources?: InputMaybe<DataSourceWhere>;
+  /** @deprecated Use `dataSources_NONE` instead. */
+  dataSources_NOT?: InputMaybe<DataSourceWhere>;
+  dataSourcesAggregate?: InputMaybe<MatchDataSourcesAggregateInput>;
+  /** Return Matches where all of the related DataSources match this filter */
+  dataSources_ALL?: InputMaybe<DataSourceWhere>;
+  /** Return Matches where none of the related DataSources match this filter */
+  dataSources_NONE?: InputMaybe<DataSourceWhere>;
+  /** Return Matches where one of the related DataSources match this filter */
+  dataSources_SINGLE?: InputMaybe<DataSourceWhere>;
+  /** Return Matches where some of the related DataSources match this filter */
+  dataSources_SOME?: InputMaybe<DataSourceWhere>;
   /** @deprecated Use `setsConnection_SOME` instead. */
   setsConnection?: InputMaybe<MatchSetsConnectionWhere>;
   /** @deprecated Use `setsConnection_NONE` instead. */
@@ -8239,6 +8454,18 @@ export type MatchWhere = {
   athletesConnection_SINGLE?: InputMaybe<MatchAthletesConnectionWhere>;
   /** Return Matches where some of the related MatchAthletesConnections match this filter */
   athletesConnection_SOME?: InputMaybe<MatchAthletesConnectionWhere>;
+  /** @deprecated Use `dataSourcesConnection_SOME` instead. */
+  dataSourcesConnection?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  /** @deprecated Use `dataSourcesConnection_NONE` instead. */
+  dataSourcesConnection_NOT?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  /** Return Matches where all of the related MatchDataSourcesConnections match this filter */
+  dataSourcesConnection_ALL?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  /** Return Matches where none of the related MatchDataSourcesConnections match this filter */
+  dataSourcesConnection_NONE?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  /** Return Matches where one of the related MatchDataSourcesConnections match this filter */
+  dataSourcesConnection_SINGLE?: InputMaybe<MatchDataSourcesConnectionWhere>;
+  /** Return Matches where some of the related MatchDataSourcesConnections match this filter */
+  dataSourcesConnection_SOME?: InputMaybe<MatchDataSourcesConnectionWhere>;
 };
 
 export type NationAthletesAggregateInput = {
@@ -9485,6 +9712,11 @@ export type SetConnectInput = {
   sets?: InputMaybe<Array<SetSetsConnectFieldInput>>;
   match?: InputMaybe<SetMatchConnectFieldInput>;
   athlete?: InputMaybe<SetAthleteConnectFieldInput>;
+  nation?: InputMaybe<SetNationConnectFieldInput>;
+};
+
+export type SetConnectOrCreateInput = {
+  nation?: InputMaybe<SetNationConnectOrCreateFieldInput>;
 };
 
 export type SetConnectWhere = {
@@ -9492,7 +9724,7 @@ export type SetConnectWhere = {
 };
 
 export type SetCreateInput = {
-  complete: Scalars["Boolean"]["input"];
+  complete?: Scalars["Boolean"]["input"];
   arrowsInOrder: Scalars["Boolean"]["input"];
   verified?: Scalars["Boolean"]["input"];
   target?: InputMaybe<SetTargetFieldInput>;
@@ -9500,6 +9732,7 @@ export type SetCreateInput = {
   sets?: InputMaybe<SetSetsFieldInput>;
   match?: InputMaybe<SetMatchFieldInput>;
   athlete?: InputMaybe<SetAthleteFieldInput>;
+  nation?: InputMaybe<SetNationFieldInput>;
 };
 
 export type SetDeleteInput = {
@@ -9508,6 +9741,7 @@ export type SetDeleteInput = {
   sets?: InputMaybe<Array<SetSetsDeleteFieldInput>>;
   match?: InputMaybe<SetMatchDeleteFieldInput>;
   athlete?: InputMaybe<SetAthleteDeleteFieldInput>;
+  nation?: InputMaybe<SetNationDeleteFieldInput>;
 };
 
 export type SetDisconnectInput = {
@@ -9516,6 +9750,7 @@ export type SetDisconnectInput = {
   sets?: InputMaybe<Array<SetSetsDisconnectFieldInput>>;
   match?: InputMaybe<SetMatchDisconnectFieldInput>;
   athlete?: InputMaybe<SetAthleteDisconnectFieldInput>;
+  nation?: InputMaybe<SetNationDisconnectFieldInput>;
 };
 
 export type SetMatchAggregateInput = {
@@ -9674,6 +9909,239 @@ export type SetMatchUpdateFieldInput = {
   disconnect?: InputMaybe<SetMatchDisconnectFieldInput>;
 };
 
+export type SetNationAggregateInput = {
+  count?: InputMaybe<Scalars["Int"]["input"]>;
+  count_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  count_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  count_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  count_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  AND?: InputMaybe<Array<SetNationAggregateInput>>;
+  OR?: InputMaybe<Array<SetNationAggregateInput>>;
+  NOT?: InputMaybe<SetNationAggregateInput>;
+  node?: InputMaybe<SetNationNodeAggregationWhereInput>;
+};
+
+export type SetNationConnectFieldInput = {
+  where?: InputMaybe<NationConnectWhere>;
+  connect?: InputMaybe<NationConnectInput>;
+  /** Whether or not to overwrite any matching relationship with the new properties. */
+  overwrite?: Scalars["Boolean"]["input"];
+};
+
+export type SetNationConnectionSort = {
+  node?: InputMaybe<NationSort>;
+};
+
+export type SetNationConnectionWhere = {
+  AND?: InputMaybe<Array<SetNationConnectionWhere>>;
+  OR?: InputMaybe<Array<SetNationConnectionWhere>>;
+  NOT?: InputMaybe<SetNationConnectionWhere>;
+  node?: InputMaybe<NationWhere>;
+  /** @deprecated Negation filters will be deprecated, use the NOT operator to achieve the same behavior */
+  node_NOT?: InputMaybe<NationWhere>;
+};
+
+export type SetNationConnectOrCreateFieldInput = {
+  where: NationConnectOrCreateWhere;
+  onCreate: SetNationConnectOrCreateFieldInputOnCreate;
+};
+
+export type SetNationConnectOrCreateFieldInputOnCreate = {
+  node: NationOnCreateInput;
+};
+
+export type SetNationCreateFieldInput = {
+  node: NationCreateInput;
+};
+
+export type SetNationDeleteFieldInput = {
+  where?: InputMaybe<SetNationConnectionWhere>;
+  delete?: InputMaybe<NationDeleteInput>;
+};
+
+export type SetNationDisconnectFieldInput = {
+  where?: InputMaybe<SetNationConnectionWhere>;
+  disconnect?: InputMaybe<NationDisconnectInput>;
+};
+
+export type SetNationFieldInput = {
+  connectOrCreate?: InputMaybe<SetNationConnectOrCreateFieldInput>;
+  create?: InputMaybe<SetNationCreateFieldInput>;
+  connect?: InputMaybe<SetNationConnectFieldInput>;
+};
+
+export type SetNationNodeAggregationWhereInput = {
+  AND?: InputMaybe<Array<SetNationNodeAggregationWhereInput>>;
+  OR?: InputMaybe<Array<SetNationNodeAggregationWhereInput>>;
+  NOT?: InputMaybe<SetNationNodeAggregationWhereInput>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  name_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  name_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  name_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  name_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  code_EQUAL?: InputMaybe<Scalars["String"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_AVERAGE_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_LONGEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_SHORTEST_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  code_AVERAGE_LENGTH_EQUAL?: InputMaybe<Scalars["Float"]["input"]>;
+  code_LONGEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  code_SHORTEST_LENGTH_EQUAL?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  code_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_AVERAGE_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_LONGEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_SHORTEST_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  code_AVERAGE_LENGTH_GT?: InputMaybe<Scalars["Float"]["input"]>;
+  code_LONGEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  code_SHORTEST_LENGTH_GT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  code_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_AVERAGE_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_LONGEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_SHORTEST_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  code_AVERAGE_LENGTH_GTE?: InputMaybe<Scalars["Float"]["input"]>;
+  code_LONGEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  code_SHORTEST_LENGTH_GTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  code_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_AVERAGE_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_LONGEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_SHORTEST_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  code_AVERAGE_LENGTH_LT?: InputMaybe<Scalars["Float"]["input"]>;
+  code_LONGEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  code_SHORTEST_LENGTH_LT?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  code_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_AVERAGE_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_LONGEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Please use the explicit _LENGTH version for string aggregation. */
+  code_SHORTEST_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  code_AVERAGE_LENGTH_LTE?: InputMaybe<Scalars["Float"]["input"]>;
+  code_LONGEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  code_SHORTEST_LENGTH_LTE?: InputMaybe<Scalars["Int"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  id_EQUAL?: InputMaybe<Scalars["ID"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  createdAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  createdAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_EQUAL?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_GTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LT?: InputMaybe<Scalars["DateTime"]["input"]>;
+  /** @deprecated Aggregation filters that are not relying on an aggregating function will be deprecated. */
+  updatedAt_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MIN_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+  updatedAt_MAX_LTE?: InputMaybe<Scalars["DateTime"]["input"]>;
+};
+
+export type SetNationUpdateConnectionInput = {
+  node?: InputMaybe<NationUpdateInput>;
+};
+
+export type SetNationUpdateFieldInput = {
+  where?: InputMaybe<SetNationConnectionWhere>;
+  connectOrCreate?: InputMaybe<SetNationConnectOrCreateFieldInput>;
+  create?: InputMaybe<SetNationCreateFieldInput>;
+  connect?: InputMaybe<SetNationConnectFieldInput>;
+  update?: InputMaybe<SetNationUpdateConnectionInput>;
+  delete?: InputMaybe<SetNationDeleteFieldInput>;
+  disconnect?: InputMaybe<SetNationDisconnectFieldInput>;
+};
+
 export type SetOfCreateInput = {
   number: Scalars["Int"]["input"];
 };
@@ -9717,6 +10185,7 @@ export type SetRelationInput = {
   sets?: InputMaybe<Array<SetSetsCreateFieldInput>>;
   match?: InputMaybe<SetMatchCreateFieldInput>;
   athlete?: InputMaybe<SetAthleteCreateFieldInput>;
+  nation?: InputMaybe<SetNationCreateFieldInput>;
 };
 
 export type SetSetsAggregateInput = {
@@ -10079,6 +10548,7 @@ export type SetUpdateInput = {
   sets?: InputMaybe<Array<SetSetsUpdateFieldInput>>;
   match?: InputMaybe<SetMatchUpdateFieldInput>;
   athlete?: InputMaybe<SetAthleteUpdateFieldInput>;
+  nation?: InputMaybe<SetNationUpdateFieldInput>;
 };
 
 export type SetWhere = {
@@ -10166,6 +10636,9 @@ export type SetWhere = {
   athlete?: InputMaybe<AthleteWhere>;
   athlete_NOT?: InputMaybe<AthleteWhere>;
   athleteAggregate?: InputMaybe<SetAthleteAggregateInput>;
+  nation?: InputMaybe<NationWhere>;
+  nation_NOT?: InputMaybe<NationWhere>;
+  nationAggregate?: InputMaybe<SetNationAggregateInput>;
   targetConnection?: InputMaybe<SetTargetConnectionWhere>;
   targetConnection_NOT?: InputMaybe<SetTargetConnectionWhere>;
   /** @deprecated Use `arrowsConnection_SOME` instead. */
@@ -10196,6 +10669,8 @@ export type SetWhere = {
   matchConnection_NOT?: InputMaybe<SetMatchConnectionWhere>;
   athleteConnection?: InputMaybe<SetAthleteConnectionWhere>;
   athleteConnection_NOT?: InputMaybe<SetAthleteConnectionWhere>;
+  nationConnection?: InputMaybe<SetNationConnectionWhere>;
+  nationConnection_NOT?: InputMaybe<SetNationConnectionWhere>;
 };
 
 export type TargetConnectWhere = {
@@ -10482,7 +10957,7 @@ export declare class SetModel {
     connect?: SetConnectInput;
     disconnect?: SetDisconnectInput;
     create?: SetCreateInput;
-
+    connectOrCreate?: SetConnectOrCreateInput;
     selectionSet?: string | DocumentNode | SelectionSetNode;
     args?: any;
     context?: any;
@@ -10645,7 +11120,7 @@ export declare class MatchModel {
     connect?: MatchConnectInput;
     disconnect?: MatchDisconnectInput;
     create?: MatchCreateInput;
-
+    connectOrCreate?: MatchConnectOrCreateInput;
     selectionSet?: string | DocumentNode | SelectionSetNode;
     args?: any;
     context?: any;

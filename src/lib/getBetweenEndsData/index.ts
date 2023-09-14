@@ -1,8 +1,18 @@
 import unpackPromiseSettledResults from "../helpers/unpackPromiseSettledRestults.js";
 import getTournaments, { TournamentFilters } from "./getTournaments/index.js";
 import { BeTournamet } from "./types.js";
-import getAllTournamentRankingEventData from "./getAllTournamentRankingEventData/index.js";
-export default async function getBetweenEndsData(filters?: TournamentFilters) {
+import getAllTournamentRankingMatchInputs from "./getAllTournamentRankingMatchInputs/index.js";
+import {
+  CompetitionCreateInput,
+  DataSourceType,
+  MatchCreateInput,
+} from "../../generated/ogm.js";
+import { OGM } from "@neo4j/graphql-ogm";
+import throttleMap from "./helpers/throttleMap.js";
+export default async function getBetweenEndsData(
+  ogm: OGM,
+  filters?: TournamentFilters
+) {
   // get all the tournaments in the BetweenEnds database
   return await getTournaments(filters).then(async (tournaments) => {
     if (tournaments === undefined)
@@ -14,12 +24,56 @@ export default async function getBetweenEndsData(filters?: TournamentFilters) {
         )}`
       );
     // get the data for each tournament that matched the filter criteria
+
     const tournamentsResults = await Promise.allSettled(
       tournaments.map(async (tournament, i0) => {
-        const tournamentLogDecorator = `${i0} / ${tournaments.length - 1}`;
-        const rankingEventResolutions = getAllTournamentRankingEventData(
-          tournament.events,
-          tournamentLogDecorator
+        const tournamentLogDecorator = `${i0 + 1} / ${tournaments.length}`;
+
+        const Competition = ogm.model("Competition");
+        const maybeMatchedCompetitions = await Competition.find({
+          where: {
+            dataSourcesConnection_SINGLE: {
+              edge: { id: String(tournament.id) },
+            },
+          },
+        });
+        if (maybeMatchedCompetitions.length > 0) {
+          throw new Error(
+            `[${new Date().toISOString()}][${tournamentLogDecorator}]: ${
+              tournament.tournament_name
+            } already exists`
+          );
+        }
+
+        const competitionInput: CompetitionCreateInput = {
+          name: tournament.tournament_name,
+          start: tournament.start_date,
+          end: tournament.end_date,
+          complete: true,
+          dataSources: {
+            connectOrCreate: [
+              {
+                where: { node: { name: "https://resultsapi.herokuapp.com" } },
+                onCreate: {
+                  node: {
+                    name: "https://resultsapi.herokuapp.com",
+                    type: DataSourceType.Web,
+                  },
+                  edge: { id: String(tournament.id) },
+                },
+              },
+            ],
+          },
+        };
+
+        const newCompetition = await Competition.create({
+          input: competitionInput,
+        });
+
+        const rankingEventResolutions = getAllTournamentRankingMatchInputs(
+          tournament,
+          tournamentLogDecorator,
+          ogm
         );
         // // todo : get data for MatchEvent events
         // const matchEvents = tournament.events.filter(
@@ -33,30 +87,27 @@ export default async function getBetweenEndsData(filters?: TournamentFilters) {
         const allEventResults = await Promise.allSettled([
           rankingEventResolutions,
         ]);
-
-        const allEventResultResolutions: Array<
-          Awaited<typeof rankingEventResolutions>
-        > = [];
-        unpackPromiseSettledResults(
-          allEventResults,
-          (resolution) => allEventResultResolutions.push(resolution),
-          (rejection) => console.error(rejection)
+        unpackPromiseSettledResults(allEventResults, undefined, (rejection) =>
+          console.error(
+            `[${new Date().toISOString()}][${tournamentLogDecorator}]: ${rejection}`
+          )
         );
 
-        return { tournament, results: allEventResultResolutions };
+        return;
       })
     );
-    const resolutions: Array<{
-      tournament: BeTournamet;
-      results: Array<
-        Awaited<ReturnType<typeof getAllTournamentRankingEventData>>
-      >;
-    }> = [];
     unpackPromiseSettledResults(
       tournamentsResults,
-      (resolution) => resolutions.push(resolution),
-      (rejection) => console.error(rejection)
+      undefined,
+      (rejection, i) => {
+        const tournamentLogDecorator = `${i + 1} / ${
+          tournamentsResults.length
+        }`;
+        console.error(
+          `[${new Date().toISOString()}][${tournamentLogDecorator}]: ${rejection}`
+        );
+      }
     );
-    return resolutions;
+    return;
   });
 }

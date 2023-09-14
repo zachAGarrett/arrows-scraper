@@ -1,5 +1,5 @@
-import { MatchStyle } from "../../../../../generated/ogm";
-import { BeEventType } from "../../../types";
+import { MatchStyle } from "../../../../generated/ogm";
+import { BeEventType } from "../../types";
 
 export default function mapMatchStyle(eventType: BeEventType) {
   if (eventType === BeEventType.MatchEvent) {
