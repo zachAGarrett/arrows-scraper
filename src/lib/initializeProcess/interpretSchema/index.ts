@@ -57,5 +57,5 @@ export default async function interpretSchema({
     driver,
   });
   if (typegenResult) await typegenResult;
-  return { neoSchema, ogm };
+  return { neoSchema, driver, ogm };
 }

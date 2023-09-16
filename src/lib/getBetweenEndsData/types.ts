@@ -31,7 +31,11 @@ export interface BeAth {
   tnl: number[];
 }
 
-export interface BeEventObj {
+export interface BeEliminationEventData {
+  etp: BeEventType.MatchEvent /** event type */;
+}
+
+export interface BeRankingEventData {
   ape: number /** arrows per end */;
   cgs: {
     ars: { aid: number /** athlete id */ }[] /** athlete results */;
@@ -43,9 +47,9 @@ export interface BeEventObj {
   dor: number;
   enm: string /** stage eg.Qualification */;
   epr: number /** ends per round */;
-  etp: BeEventType /** event type */;
+  etp: BeEventType.RankingEvent /** event type */;
   fita: boolean;
-  id: number;
+  id: number /** WARNING: This id is different than the id used to query the event from the api endpoint */;
   nos: number;
   rds: number /** rounds */;
   rps?: {
@@ -74,41 +78,6 @@ export interface BeScoresObj {
 
 // ARCHENEMY -> BE FETCH TYPES
 //////////////////////////////
-
-export interface AthleteEventProfile {
-  aid: number;
-  alt: string;
-  cnd:
-    | "CMM"
-    | "CMW"
-    | "RMM"
-    | "RMW"
-    | "CSM"
-    | "CSW"
-    | "RSM"
-    | "RSW"
-    | "CJM"
-    | "CJW"
-    | "RJM"
-    | "RJW"
-    | "CCM"
-    | "CCW"
-    | "CRM"
-    | "CRW";
-  fnm: string;
-  lnm: string;
-  tgt: string;
-  tm: string;
-  tnl: number[];
-  start: string;
-  end: string;
-  comp_id: number;
-  arrows_per_end: number;
-  name: string;
-  place: string;
-  ends: number[][];
-  stats: any;
-}
 
 export enum BeEndpoint {
   tournaments = "tournaments",
@@ -194,7 +163,22 @@ export enum BeDivision {
   FU21W = "FU21W", // Fixed Pins U21 Women
   FU18W = "FU18W", // Fixed Pins U18 Women
 
+  // Unknown divisions
+  // todo: add divisions to division map
+  CM = "CM",
+  CW = "CW",
+  RM = "RM",
+  RW = "RW",
   HBM = "HBM",
+  CMM = "CMM",
+  CMW = "CMW",
+  RMM = "RMM",
+  CJM = "CJM",
+  CJW = "CJW",
+  RJM = "RJM",
+  RJW = "RJW",
+  CRM = "CRM",
+  CRW = "CRW",
 }
 
 export interface EventProfile {
@@ -205,4 +189,9 @@ export interface EventProfile {
   name: string;
   place: string;
   event_type: BeEventType;
+}
+
+export enum Season {
+  IND = "indoor",
+  OUT = "outdoor",
 }
