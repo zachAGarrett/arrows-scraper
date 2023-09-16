@@ -46,5 +46,5 @@ export default function parseAthlete({
       ],
     },
   };
-  return athleteInput;
+  return { athleteInput, matchId, athleteDataSourceId: String(athlete.aid) };
 }

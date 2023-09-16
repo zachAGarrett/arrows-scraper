@@ -77,30 +77,29 @@ export default async function getBetweenEndsData(
               decorator_1
             );
             const athleteInputs = athleteInputsConstructor(newMatch.id);
-            await Promise.all(
-              athleteInputs.map(async (input, i_2, arr_2) => {
+            await throttleMap(
+              athleteInputs,
+              async (
+                { athleteInput, athleteDataSourceId, matchId },
+                i_2,
+                arr_2
+              ) => {
                 const decorator_2 =
                   decorator_1 +
-                  `[Athlete ${i_2 + 1}/${arr_2.length}][${input.familyName} ${
-                    input.givenName
-                  }]`;
+                  `[Athlete ${i_2 + 1}/${arr_2.length}][${
+                    athleteInput.familyName
+                  } ${athleteInput.givenName}]`;
 
-                await loadAthlete(input, ogm, decorator_2);
-              })
+                await loadAthlete(
+                  athleteInput,
+                  athleteDataSourceId,
+                  matchId,
+                  ogm,
+                  decorator_2
+                );
+              },
+              500
             );
-            // await throttleMap(
-            //   athleteInputs,
-            //   async (input, i_2, arr_2) => {
-            //     const decorator_2 =
-            //       decorator_1 +
-            //       `[Athlete ${i_2 + 1}/${arr_2.length}][${input.familyName} ${
-            //         input.givenName
-            //       }]`;
-
-            //     await loadAthlete(input, ogm, decorator_2);
-            //   },
-            //   500
-            // );
           },
           500
         );

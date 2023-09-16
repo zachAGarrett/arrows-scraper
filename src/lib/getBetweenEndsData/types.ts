@@ -89,6 +89,7 @@ export enum BeEventType {
   CustomPointsEvent = "CustomPointsEvent",
 }
 export enum BeDivision {
+  RM = "RM", // Recurve Senior Men
   RSM = "RSM", // Recurve Senior Men
   RU21M = "RU21M", // Recurve U21 (Junior) Men
   RU18M = "RU18M", // Recurve U18 (Cadet) Men
@@ -102,6 +103,7 @@ export enum BeDivision {
   RCM = "RCM", // Recurve College Men
   ROM = "ROM", // Recurve Open Men
 
+  RW = "RW", // Recurve Senior Women
   RSW = "RSW", // Recurve Senior Women
   RU21W = "RU21W", // Recurve U21 (Junior) Women
   RU18W = "RU18W", // Recurve U18 (Cadet) Women
@@ -115,6 +117,7 @@ export enum BeDivision {
   RCW = "RCW", // Recurve College Women
   ROW = "ROW", // Recurve Open Women
 
+  CM = "CM", // Compound Senior Men
   CSM = "CSM", // Compound Senior Men
   CU21M = "CU21M", // Compound U21 (Junior) Men
   CU18M = "CU18M", // Compound U18 (Cadet) Men
@@ -128,6 +131,7 @@ export enum BeDivision {
   CCM = "CCM", // Compound College Men
   COM = "COM", // Compound Open Men
 
+  CW = "CW", // Compound Senior Women
   CSW = "CSW", // Compound Senior Women
   CU21W = "CU21W", // Compound U21 (Junior) Women
   CU18W = "CU18W", // Compound U18 (Cadet) Women
@@ -165,10 +169,6 @@ export enum BeDivision {
 
   // Unknown divisions
   // todo: add divisions to division map
-  CM = "CM",
-  CW = "CW",
-  RM = "RM",
-  RW = "RW",
   HBM = "HBM",
   CMM = "CMM",
   CMW = "CMW",

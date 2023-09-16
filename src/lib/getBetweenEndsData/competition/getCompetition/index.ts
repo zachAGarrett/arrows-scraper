@@ -4,7 +4,8 @@ import { filterByName } from "./filterByName";
 
 export interface CompetitionFilters {
   name?: string;
-  first?: number;
+  offset?: number;
+  limit?: number;
 }
 export default async function getCompetition(filters?: CompetitionFilters) {
   const competitions = await fetchData(BeEndpoint.tournaments).then(
@@ -12,11 +13,11 @@ export default async function getCompetition(filters?: CompetitionFilters) {
   );
 
   if (filters === undefined) return competitions;
-  const { name, first } = filters;
+  const { name, offset, limit } = filters;
   // todo : abstract filters to allow for more complex filter types
   return competitions
     ?.filter((comp) => {
       return name && filterByName(comp, name);
     })
-    .slice(0, first === undefined ? competitions.length : first);
+    .slice(offset || 0, limit === undefined ? competitions.length : limit);
 }
